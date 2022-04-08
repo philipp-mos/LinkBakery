@@ -1,9 +1,9 @@
-﻿using LinkBakery.Core.Models;
+﻿using LinkBakery.Web.Redirect.Dtos;
 
 namespace LinkBakery.Web.Redirect.Services.Interfaces
 {
     public interface ITrackingLinkService
     {
-        IEnumerable<TrackingLink> GetAll();
+        IEnumerable<TrackingLinkDto> GetAll();
     }
 }
