@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LinkBakery.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace LinkBakery.Core.Data
 {
@@ -6,5 +7,8 @@ namespace LinkBakery.Core.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
+
+
+        public DbSet<TrackingLink> TrackingLinks { get; set; }
     }
 }
