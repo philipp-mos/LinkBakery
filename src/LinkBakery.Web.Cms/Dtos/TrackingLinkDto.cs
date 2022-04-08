@@ -1,4 +1,4 @@
-﻿namespace LinkBakery.Web.Redirect.Dtos
+﻿namespace LinkBakery.Web.Cms.Dtos
 {
     public class TrackingLinkDto
     {

@@ -1,14 +1,10 @@
 ﻿@page "/"
-@using LinkBakery.Core.Models
-@using LinkBakery.Core.Repositories.Interfaces
+@using LinkBakery.Web.Cms.Dtos
+@using LinkBakery.Web.Cms.Services.Interfaces
 
-@inject ITrackingLinkRepository TrackingLinkRepository
+@inject ITrackingLinkService TrackingLinkService
 
 <PageTitle>Index</PageTitle>
-
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
 
 @foreach (var trackingLink in trackingLinks)
 {
@@ -18,11 +14,10 @@ Welcome to your new app.
 
 
 @code {
-    // Testing
-    private IEnumerable<TrackingLink> trackingLinks = new List<TrackingLink>();
+    private IEnumerable<TrackingLinkDto> trackingLinks = new List<TrackingLinkDto>();
 
     protected override async Task OnInitializedAsync()
     {
-        trackingLinks = await TrackingLinkRepository.GetAllAsync();
+        trackingLinks = await TrackingLinkService.GetAllAsync();
     }
 }

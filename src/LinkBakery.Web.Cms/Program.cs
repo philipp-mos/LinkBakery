@@ -1,6 +1,8 @@
 using LinkBakery.Core.Data;
 using LinkBakery.Core.Repositories;
 using LinkBakery.Core.Repositories.Interfaces;
+using LinkBakery.Web.Cms.Services;
+using LinkBakery.Web.Cms.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +15,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     );
 });
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 builder.Services.AddScoped<ITrackingLinkRepository, TrackingLinkRepository>();
 
+builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
 
-// Add services to the container.
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
@@ -26,7 +32,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

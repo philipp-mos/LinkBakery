@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using LinkBakery.Core.Models;
-using LinkBakery.Web.Redirect.Dtos;
+using LinkBakery.Web.Cms.Dtos;
 
-namespace LinkBakery.Web.Redirect.Profiles
+namespace LinkBakery.Web.Cms.Profiles
 {
     public class TrackingLinkProfile : Profile
     {
