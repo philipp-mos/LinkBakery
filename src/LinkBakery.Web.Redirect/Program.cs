@@ -35,7 +35,10 @@ app.MapGet("/all", (ITrackingLinkService trackingLinkService)
     => trackingLinkService.GetAll());
 
 
-app.MapGet("/redirect/{key}", (string key, ITrackingLinkService trackingLinkService, HttpContext httpContext) =>
+
+
+
+var redirectTrackingKey = (string key, ITrackingLinkService trackingLinkService, HttpContext httpContext) =>
 {
     var targetUrl = trackingLinkService.GetLink(key);
 
@@ -45,9 +48,12 @@ app.MapGet("/redirect/{key}", (string key, ITrackingLinkService trackingLinkServ
         return;
     }
 
-    httpContext.Response.StatusCode = (int) HttpStatusCode.Redirect;
+    httpContext.Response.StatusCode = (int)HttpStatusCode.Redirect;
     httpContext.Response.Redirect(targetUrl);
-});
+};
+
+
+app.MapGet("/redirect/{key}", redirectTrackingKey);
 
 
 app.Run();

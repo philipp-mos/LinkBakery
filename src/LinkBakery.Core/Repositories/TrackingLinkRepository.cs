@@ -10,7 +10,7 @@ namespace LinkBakery.Core.Repositories
             : base(configuration) { }
 
 
-        public TrackingLink? FindByKey(string key)
+        public TrackingLink? FindActiveByKey(string key)
         {
             if (string.IsNullOrEmpty(key))
             {

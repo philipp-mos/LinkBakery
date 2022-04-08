@@ -26,7 +26,7 @@ namespace LinkBakery.Web.Redirect.Services
 
         public string? GetLink(string key)
         {
-            var trackingLink = _trackingLinkRepository.FindByKey(key);
+            var trackingLink = _trackingLinkRepository.FindActiveByKey(key);
 
             if (trackingLink == null)
             {
