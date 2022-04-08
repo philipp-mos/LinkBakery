@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkBakery.Web.Redirect", "LinkBakery.Web.Redirect\LinkBakery.Web.Redirect.csproj", "{FE078DCB-8FA2-4D6D-8A0E-7809A5B2D585}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkBakery.Web.Redirect", "LinkBakery.Web.Redirect\LinkBakery.Web.Redirect.csproj", "{FE078DCB-8FA2-4D6D-8A0E-7809A5B2D585}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkBakery.Core", "LinkBakery.Core\LinkBakery.Core.csproj", "{A7179063-1F89-4F5C-98E2-E0F37C8F1192}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{FE078DCB-8FA2-4D6D-8A0E-7809A5B2D585}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE078DCB-8FA2-4D6D-8A0E-7809A5B2D585}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE078DCB-8FA2-4D6D-8A0E-7809A5B2D585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7179063-1F89-4F5C-98E2-E0F37C8F1192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7179063-1F89-4F5C-98E2-E0F37C8F1192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7179063-1F89-4F5C-98E2-E0F37C8F1192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7179063-1F89-4F5C-98E2-E0F37C8F1192}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
