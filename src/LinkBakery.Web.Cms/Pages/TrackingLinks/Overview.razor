@@ -1,0 +1,55 @@
+﻿@page "/TrackingLinks/Overview"
+@using LinkBakery.Web.Cms.Dtos
+@using LinkBakery.Web.Cms.Services.Interfaces
+
+@inject ITrackingLinkService TrackingLinkService
+@inject NavigationManager UriHelper
+
+<PageTitle>Übersicht Links</PageTitle>
+
+<h2>Übersicht Links</h2>
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Key</th>
+            <th scope="col">Url Ziel</th>
+            <th scope="col">Aktiv</th>
+            <th scope="col">Bearbeiten</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var trackingLink in trackingLinks)
+        {
+            <tr>
+                <td>@trackingLink.Id</td>
+                <td>@trackingLink.Key</td>
+                <td>@trackingLink.TargetUrl</td>
+                <td>@trackingLink.IsActive</td>
+                <td>
+                    <span @onclick="(e => NavigateToEdit(trackingLink.Id))" class="oi oi-cog me-2"></span>
+                    <a href="#"><span class="oi oi-clipboard"></span></a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+
+@code {
+    private IEnumerable<TrackingLinkOverviewDto> trackingLinks = new List<TrackingLinkOverviewDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        trackingLinks = await TrackingLinkService.GetAllAsync();
+    }
+
+
+    void NavigateToEdit(int id) => UriHelper.NavigateTo($"/TrackingLinks/Edit/{ id }");
+}

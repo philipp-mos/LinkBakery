@@ -19,8 +19,12 @@ namespace LinkBakery.Web.Cms.Services
         }
 
 
-        public async Task<IEnumerable<TrackingLinkDto>> GetAllAsync()
-            => _mapper.Map<IEnumerable<TrackingLinkDto>>(await _trackingLinkRepository.GetAllAsync());
+        public async Task<IEnumerable<TrackingLinkOverviewDto>> GetAllAsync()
+            => _mapper.Map<IEnumerable<TrackingLinkOverviewDto>>(await _trackingLinkRepository.GetAllAsync());
+
+
+        public async Task<TrackingLinkEditDto> FindByIdAsync(int id)
+            => _mapper.Map<TrackingLinkEditDto>(await _trackingLinkRepository.GetByIdAsync(id));
 
     }
 }

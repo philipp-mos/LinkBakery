@@ -1,23 +1,3 @@
 ﻿@page "/"
-@using LinkBakery.Web.Cms.Dtos
-@using LinkBakery.Web.Cms.Services.Interfaces
-
-@inject ITrackingLinkService TrackingLinkService
 
 <PageTitle>Index</PageTitle>
-
-@foreach (var trackingLink in trackingLinks)
-{
-    <p>@trackingLink.Key | @trackingLink.TargetUrl</p>
-}
-
-
-
-@code {
-    private IEnumerable<TrackingLinkDto> trackingLinks = new List<TrackingLinkDto>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        trackingLinks = await TrackingLinkService.GetAllAsync();
-    }
-}
