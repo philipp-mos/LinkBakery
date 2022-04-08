@@ -28,10 +28,10 @@
                 <td>@trackingLink.Id</td>
                 <td>@trackingLink.Key</td>
                 <td>@trackingLink.TargetUrl</td>
-                <td>@trackingLink.IsActive</td>
+                <td>@GetActiveValueTitle(trackingLink.IsActive)</td>
                 <td>
                     <span @onclick="(e => NavigateToEdit(trackingLink.Id))" class="oi oi-cog me-2"></span>
-                    <a href="#"><span class="oi oi-clipboard"></span></a>
+                    <span @onclick="(e => NavigateToChart(trackingLink.Id))" class="oi oi-bar-chart"></span>
                 </td>
             </tr>
         }
@@ -50,6 +50,18 @@
         trackingLinks = await TrackingLinkService.GetAllAsync();
     }
 
-
+    
     void NavigateToEdit(int id) => UriHelper.NavigateTo($"/TrackingLinks/Edit/{ id }");
+    void NavigateToChart(int id) => UriHelper.NavigateTo($"/TrackingLinks/Chart/{ id }");
+
+
+    private string GetActiveValueTitle(bool isActive)
+    {
+        if (isActive)
+        {
+            return "Ja";
+        }
+
+        return "Nein";
+    }
 }

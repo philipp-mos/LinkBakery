@@ -26,5 +26,23 @@ namespace LinkBakery.Web.Cms.Services
         public async Task<TrackingLinkEditDto> FindByIdAsync(int id)
             => _mapper.Map<TrackingLinkEditDto>(await _trackingLinkRepository.GetByIdAsync(id));
 
+
+        public async void UpdateEntry(TrackingLinkEditDto trackingLinkDto)
+        {
+            var trackingLink = await _trackingLinkRepository.GetByIdAsync(trackingLinkDto.Id);
+
+            if (trackingLink == null)
+            {
+                return;
+            }
+
+            trackingLink.TargetUrl = trackingLinkDto.TargetUrl;
+            trackingLink.IsActive = trackingLinkDto.IsActive;
+            trackingLink.RedirectWithQueryParameter = trackingLinkDto.RedirectWithQueryParameter;
+
+            _trackingLinkRepository.Update(trackingLink);
+            _trackingLinkRepository.SaveAsync();
+        }
+
     }
 }

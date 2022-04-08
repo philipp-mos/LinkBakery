@@ -1,0 +1,24 @@
+﻿@page "/TrackingLinks/Chart/{Id:int}"
+
+@using LinkBakery.Web.Cms.Dtos
+@using LinkBakery.Web.Cms.Services.Interfaces
+
+@inject ITrackingLinkService TrackingLinkService
+
+<PageTitle>Link-Chart</PageTitle>
+
+<h2>Link-Chart</h2>
+
+
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private TrackingLinkEditDto trackingLink;
+
+    protected override async Task OnInitializedAsync()
+        => trackingLink = await TrackingLinkService.FindByIdAsync(Id);
+
+}
