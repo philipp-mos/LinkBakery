@@ -28,7 +28,7 @@ namespace LinkBakery.Web.Redirect.Services
             => _mapper.Map<IEnumerable<TrackingLinkDto>>(_trackingLinkRepository.GetAllAsync());
 
 
-        public string? GetLink(string key)
+        public string? GetLinkAndTrackCall(string key, string? queryString = null)
         {
             var trackingLink = _trackingLinkRepository.FindActiveByKey(key);
 
@@ -37,7 +37,12 @@ namespace LinkBakery.Web.Redirect.Services
                 return null;
             }
 
-            SaveLinkTrackingCall(trackingLink);
+            SaveLinkTrackingCall(trackingLink, queryString);
+
+            if (trackingLink.RedirectWithQueryParameter && !string.IsNullOrEmpty(queryString))
+            {
+                return $"{ trackingLink.TargetUrl }{ queryString }";
+            }
 
             return trackingLink.TargetUrl;
         }
@@ -45,14 +50,20 @@ namespace LinkBakery.Web.Redirect.Services
 
 
 
-        private void SaveLinkTrackingCall(TrackingLink trackingLink)
+        private void SaveLinkTrackingCall(TrackingLink trackingLink, string? queryString)
         {
-            _trackingLinkCallRepository.InsertAndSafeAsync(new TrackingLinkCall
-                {
-                    DateTime = DateTime.Now,
-                    TrackingLinkId = trackingLink.Id
-                }
-            );
+            var trackingLinkCall = new TrackingLinkCall
+            {
+                DateTime = DateTime.Now,
+                TrackingLinkId = trackingLink.Id
+            };
+
+            if (trackingLink.RedirectWithQueryParameter && !string.IsNullOrEmpty(queryString))
+            {
+                trackingLinkCall.QueryParameter = queryString;
+            }
+
+            _trackingLinkCallRepository.InsertAndSafeAsync(trackingLinkCall);
         }
     }
 }

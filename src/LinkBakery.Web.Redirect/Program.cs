@@ -32,7 +32,7 @@ var app = builder.Build();
 
 var redirectTrackingKey = (string key, ITrackingLinkService trackingLinkService, HttpContext httpContext) =>
 {
-    var targetUrl = trackingLinkService.GetLink(key);
+    var targetUrl = trackingLinkService.GetLinkAndTrackCall(key, httpContext.Request.QueryString.Value);
 
     if (string.IsNullOrEmpty(targetUrl))
     {
