@@ -1,6 +1,8 @@
 using LinkBakery.Core.Data;
 using LinkBakery.Core.Repositories;
 using LinkBakery.Core.Repositories.Interfaces;
+using LinkBakery.Web.Redirect.Services;
+using LinkBakery.Web.Redirect.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 builder.Services.AddScoped<ITrackingLinkRepository, TrackingLinkRepository>();
-    
+
+builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
+
 
 
 var app = builder.Build();
@@ -23,8 +27,8 @@ var app = builder.Build();
 
 app.MapGet("/", () => { });
 
-app.MapGet("/all", (ITrackingLinkRepository trackingLinkRepository) 
-    => trackingLinkRepository.GetAll());
+app.MapGet("/all", (ITrackingLinkService trackingLinkService) 
+    => trackingLinkService.GetAll());
 
 
 app.Run();
