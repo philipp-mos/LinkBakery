@@ -2,9 +2,10 @@
 {
     public interface IBaseRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T? GetById(object id);
-        void Insert(T entity);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T?> GetByIdAsync(object id);
+        void InsertAsync(T entity);
+        void InsertAndSafeAsync(T entity);
         void Update(T entity);
         void Delete(object id);
         void SaveAsync();

@@ -25,7 +25,7 @@ namespace LinkBakery.Web.Redirect.Services
 
 
         public IEnumerable<TrackingLinkDto> GetAll()
-            => _mapper.Map<IEnumerable<TrackingLinkDto>>(_trackingLinkRepository.GetAll());
+            => _mapper.Map<IEnumerable<TrackingLinkDto>>(_trackingLinkRepository.GetAllAsync());
 
 
         public string? GetLink(string key)
@@ -47,14 +47,12 @@ namespace LinkBakery.Web.Redirect.Services
 
         private void SaveLinkTrackingCall(TrackingLink trackingLink)
         {
-            _trackingLinkCallRepository.Insert(new TrackingLinkCall
+            _trackingLinkCallRepository.InsertAndSafeAsync(new TrackingLinkCall
                 {
                     DateTime = DateTime.Now,
-                    TrackingLink = trackingLink
+                    TrackingLinkId = trackingLink.Id
                 }
             );
-
-            _trackingLinkCallRepository.SaveAsync();
         }
     }
 }

@@ -11,5 +11,12 @@ namespace LinkBakery.Core.Data
 
         public DbSet<TrackingLink> TrackingLinks { get; set; }
         public DbSet<TrackingLinkCall> TrackingLinkCalls { get; set; }
+
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+        }
     }
 }

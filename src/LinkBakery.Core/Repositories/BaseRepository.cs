@@ -22,19 +22,24 @@ namespace LinkBakery.Core.Repositories
 
 
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return _table.ToList();
+            return await _table.ToListAsync();
         }
 
-        public T? GetById(object id)
+        public async Task<T?> GetByIdAsync(object id)
         {
-            return _table.Find(id);
+            return await _table.FindAsync(id);
         }
 
-        public void Insert(T entity)
+        public async void InsertAsync(T entity)
         {
-            _table.Add(entity);
+            await _table.AddAsync(entity);
+        }
+        public void InsertAndSafeAsync(T entity)
+        {
+            InsertAsync(entity);
+            SaveAsync();
         }
 
         public void Update(T entity)
@@ -53,9 +58,9 @@ namespace LinkBakery.Core.Repositories
             }
         }
 
-        public void SaveAsync()
+        public async void SaveAsync()
         {
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }
