@@ -5,17 +5,16 @@ using LinkBakery.Web.Cms.Services.Interfaces;
 
 namespace LinkBakery.Web.Cms.Services
 {
-    public class TrackingLinkService : ITrackingLinkService
+    public class TrackingLinkService : Core.Services.TrackingLinkService, ITrackingLinkService
     {
-        private readonly ITrackingLinkRepository _trackingLinkRepository;
         private readonly IMapper _mapper;
 
 
         public TrackingLinkService(
             ITrackingLinkRepository trackingLinkRepository,
             IMapper mapper)
+            : base(trackingLinkRepository)
         {
-            _trackingLinkRepository = trackingLinkRepository;
             _mapper = mapper;
         }
 

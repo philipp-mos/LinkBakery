@@ -4,17 +4,16 @@ using LinkBakery.Web.Redirect.Services.Interfaces;
 
 namespace LinkBakery.Web.Redirect.Services
 {
-    public class TrackingLinkService : ITrackingLinkService
+    public class TrackingLinkService : Core.Services.TrackingLinkService, ITrackingLinkService
     {
-        private readonly ITrackingLinkRepository _trackingLinkRepository;
         private readonly ITrackingLinkCallRepository _trackingLinkCallRepository;
 
 
         public TrackingLinkService(
             ITrackingLinkRepository trackingLinkRepository,
             ITrackingLinkCallRepository trackingLinkCallRepository)
+            : base(trackingLinkRepository)
         {
-            _trackingLinkRepository = trackingLinkRepository;
             _trackingLinkCallRepository = trackingLinkCallRepository;
         }
 

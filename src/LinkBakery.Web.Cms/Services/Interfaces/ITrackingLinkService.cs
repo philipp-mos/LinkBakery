@@ -2,7 +2,7 @@
 
 namespace LinkBakery.Web.Cms.Services.Interfaces
 {
-    public interface ITrackingLinkService
+    public interface ITrackingLinkService : Core.Services.Interfaces.ITrackingLinkService
     {
         Task<IEnumerable<TrackingLinkDto>> GetAllAsync();
     }
