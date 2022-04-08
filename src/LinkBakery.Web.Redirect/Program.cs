@@ -29,15 +29,6 @@ builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
 var app = builder.Build();
 
 
-app.MapGet("/", () => { });
-
-app.MapGet("/all", (ITrackingLinkService trackingLinkService) 
-    => trackingLinkService.GetAll());
-
-
-
-
-
 var redirectTrackingKey = (string key, ITrackingLinkService trackingLinkService, HttpContext httpContext) =>
 {
     var targetUrl = trackingLinkService.GetLink(key);
@@ -53,7 +44,7 @@ var redirectTrackingKey = (string key, ITrackingLinkService trackingLinkService,
 };
 
 
-app.MapGet("/redirect/{key}", redirectTrackingKey);
+app.MapGet("/{key}", redirectTrackingKey);
 
 
 app.Run();
