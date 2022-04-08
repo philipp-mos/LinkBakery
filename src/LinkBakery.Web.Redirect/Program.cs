@@ -4,6 +4,7 @@ using LinkBakery.Core.Repositories.Interfaces;
 using LinkBakery.Web.Redirect.Services;
 using LinkBakery.Web.Redirect.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,21 @@ app.MapGet("/", () => { });
 
 app.MapGet("/all", (ITrackingLinkService trackingLinkService) 
     => trackingLinkService.GetAll());
+
+
+app.MapGet("/redirect/{key}", (string key, ITrackingLinkService trackingLinkService, HttpContext httpContext) =>
+{
+    var targetUrl = trackingLinkService.GetLink(key);
+
+    if (string.IsNullOrEmpty(targetUrl))
+    {
+        httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+        return;
+    }
+
+    httpContext.Response.StatusCode = (int) HttpStatusCode.Redirect;
+    httpContext.Response.Redirect(targetUrl);
+});
 
 
 app.Run();

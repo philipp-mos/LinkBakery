@@ -8,5 +8,16 @@ namespace LinkBakery.Core.Repositories
     {
         public TrackingLinkRepository(IConfiguration configuration)
             : base(configuration) { }
+
+
+        public TrackingLink? FindByKey(string key)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                return null;
+            }
+
+            return _table.FirstOrDefault(x => x.Key == key && x.IsActive == true);
+        }
     }
 }

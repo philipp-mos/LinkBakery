@@ -22,5 +22,18 @@ namespace LinkBakery.Web.Redirect.Services
 
         public IEnumerable<TrackingLinkDto> GetAll()
             => _mapper.Map<IEnumerable<TrackingLinkDto>>(_trackingLinkRepository.GetAll());
+
+
+        public string? GetLink(string key)
+        {
+            var trackingLink = _trackingLinkRepository.FindByKey(key);
+
+            if (trackingLink == null)
+            {
+                return null;
+            }
+
+            return trackingLink.TargetUrl;
+        }
     }
 }
