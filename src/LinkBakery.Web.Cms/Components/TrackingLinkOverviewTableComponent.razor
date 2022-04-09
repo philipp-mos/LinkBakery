@@ -1,0 +1,60 @@
+﻿@using LinkBakery.Web.Cms.Services.Interfaces
+@using LinkBakery.Web.Cms.Dtos
+
+@inject ITrackingLinkService trackingLinkService
+@inject NavigationManager uriHelper
+
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Key</th>
+            <th scope="col">Url Ziel</th>
+            <th scope="col">Aktiv</th>
+            <th scope="col">Bearbeiten</th>
+        </tr>
+    </thead>
+    <tbody>        
+        @foreach (var trackingLink in trackingLinks)
+        {
+            <tr>
+                <td>@trackingLink.Id</td>
+                <td>@trackingLink.Key</td>
+                <td>@trackingLink.TargetUrl</td>
+                <td>@GetActiveValueTitle(trackingLink.IsActive)</td>
+                <td>
+                    <span @onclick="(() => NavigateToEdit(trackingLink.Id))" class="oi oi-cog me-2"></span>
+                    <span @onclick="(() => NavigateToChart(trackingLink.Id))" class="oi oi-bar-chart"></span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@code {
+    private IEnumerable<TrackingLinkOverviewDto> trackingLinks = new List<TrackingLinkOverviewDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        trackingLinks = await trackingLinkService.GetAllAsync();
+    }
+
+    
+    void NavigateToEdit(int id) => uriHelper.NavigateTo($"/TrackingLinks/Edit/{ id }");
+    void NavigateToChart(int id) => uriHelper.NavigateTo($"/TrackingLinks/Chart/{ id }");
+
+
+    private string GetActiveValueTitle(bool isActive)
+    {
+        if (isActive)
+        {
+            return "Ja";
+        }
+
+        return "Nein";
+    }
+}

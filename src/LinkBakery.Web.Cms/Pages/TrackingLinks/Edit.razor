@@ -1,62 +1,16 @@
 ﻿@page "/TrackingLinks/Edit/{Id:int}"
 
-@using LinkBakery.Web.Cms.Dtos
-@using LinkBakery.Web.Cms.Services.Interfaces
+@using LinkBakery.Web.Cms.Components
 
-@inject ITrackingLinkService TrackingLinkService
-@inject NavigationManager UriHelper
 
 <PageTitle>Link Bearbeiten</PageTitle>
 
 <h2>Link Bearbeiten</h2>
 
-<div class="form-floating mb-3">
-    <input class="form-control" value="@trackingLink.Key" disabled>
-    <label for="floatingInput">Key</label>
-</div>
-
-
-<EditForm Model="@trackingLink" OnValidSubmit="@HandleValidSubmit">
-
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-floating mb-3">
-        <input class="form-control" @bind-value="trackingLink.TargetUrl">
-        <label for="floatingInput">Ziel Url</label>
-    </div>
-    
-
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="isactive" @bind="trackingLink.IsActive">
-        <label class="form-check-label" for="isactive">Aktiv</label>
-    </div>
-
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="allowqueryparameter" @bind="trackingLink.RedirectWithQueryParameter">
-        <label class="form-check-label" for="allowqueryparameter">Queryparameter weiterleiten</label>
-    </div>
-
-
-    <button type="submit" class="btn btn-primary mt-5">Speichern</button>
-
-</EditForm>
-
+<TrackingLinkEditComponent Id="@Id" />
 
 
 @code {
     [Parameter]
     public int Id { get; set; }
-
-    private TrackingLinkEditDto trackingLink;
-
-    protected override async Task OnInitializedAsync()
-        => trackingLink = await TrackingLinkService.FindByIdAsync(Id);
-
-
-    private void HandleValidSubmit()
-    {
-        TrackingLinkService.UpdateEntry(trackingLink);
-        UriHelper.NavigateTo("/TrackingLinks/Overview", true);
-    }
 }

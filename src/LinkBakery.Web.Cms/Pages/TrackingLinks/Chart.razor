@@ -9,7 +9,12 @@
 
 <h2>Link-Chart</h2>
 
-
+@foreach(var trackingLinkCall in trackingLinkCalls)
+{
+    <p>
+        @trackingLinkCall.DateTime
+    </p>
+}
 
 
 @code {
@@ -17,8 +22,12 @@
     public int Id { get; set; }
 
     private TrackingLinkEditDto trackingLink;
+    private IEnumerable<TrackingLinkCallChartDto> trackingLinkCalls;
 
     protected override async Task OnInitializedAsync()
-        => trackingLink = await TrackingLinkService.FindByIdAsync(Id);
+    {
+        trackingLink = await TrackingLinkService.FindByIdAsync(Id);
+        trackingLinkCalls = TrackingLinkService.GetCallChartData(Id);
+    }
 
 }
