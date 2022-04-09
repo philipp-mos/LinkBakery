@@ -12,8 +12,9 @@ namespace LinkBakery.Web.Cms.Services
 
         public TrackingLinkService(
             ITrackingLinkRepository trackingLinkRepository,
+            ITrackingLinkCallRepository trackingLinkCallRepository,
             IMapper mapper)
-            : base(trackingLinkRepository)
+            : base(trackingLinkRepository, trackingLinkCallRepository)
         {
             _mapper = mapper;
         }
@@ -25,6 +26,11 @@ namespace LinkBakery.Web.Cms.Services
 
         public async Task<TrackingLinkEditDto> FindByIdAsync(int id)
             => _mapper.Map<TrackingLinkEditDto>(await _trackingLinkRepository.GetByIdAsync(id));
+
+        public IEnumerable<TrackingLinkCallChartDto> GetCallChartData(int trackingLinkId)
+        {
+            return _mapper.Map<IEnumerable<TrackingLinkCallChartDto>>(_trackingLinkCallRepository.GetAllForTrackingLink(trackingLinkId));
+        }
 
 
         public async void UpdateEntry(TrackingLinkEditDto trackingLinkDto)

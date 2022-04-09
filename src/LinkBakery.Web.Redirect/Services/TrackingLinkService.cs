@@ -6,16 +6,11 @@ namespace LinkBakery.Web.Redirect.Services
 {
     public class TrackingLinkService : Core.Services.TrackingLinkService, ITrackingLinkService
     {
-        private readonly ITrackingLinkCallRepository _trackingLinkCallRepository;
-
-
         public TrackingLinkService(
             ITrackingLinkRepository trackingLinkRepository,
             ITrackingLinkCallRepository trackingLinkCallRepository)
-            : base(trackingLinkRepository)
-        {
-            _trackingLinkCallRepository = trackingLinkCallRepository;
-        }
+            : base(trackingLinkRepository, trackingLinkCallRepository)
+        { }
 
 
         public string? GetLinkAndTrackCall(string key, string? queryString = null)

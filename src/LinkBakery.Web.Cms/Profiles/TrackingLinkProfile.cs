@@ -10,6 +10,8 @@ namespace LinkBakery.Web.Cms.Profiles
         {
             CreateMap<TrackingLink, TrackingLinkOverviewDto>();
             CreateMap<TrackingLink, TrackingLinkEditDto>();
+
+            CreateMap<TrackingLinkCall, TrackingLinkCallChartDto>();
         }
     }
 }

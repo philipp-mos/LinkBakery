@@ -19,6 +19,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 builder.Services.AddScoped<ITrackingLinkRepository, TrackingLinkRepository>();
+builder.Services.AddScoped<ITrackingLinkCallRepository, TrackingLinkCallRepository>();
 
 builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
 

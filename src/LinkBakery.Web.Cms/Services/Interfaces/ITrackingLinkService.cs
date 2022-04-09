@@ -6,6 +6,7 @@ namespace LinkBakery.Web.Cms.Services.Interfaces
     {
         Task<IEnumerable<TrackingLinkOverviewDto>> GetAllAsync();
         Task<TrackingLinkEditDto> FindByIdAsync(int id);
+        IEnumerable<TrackingLinkCallChartDto> GetCallChartData(int trackingLinkId);
         void UpdateEntry(TrackingLinkEditDto trackingLinkDto);
     }
 }

@@ -8,5 +8,11 @@ namespace LinkBakery.Core.Repositories
     {
         public TrackingLinkCallRepository(IConfiguration configuration)
             : base(configuration) { }
+
+
+        public IEnumerable<TrackingLinkCall> GetAllForTrackingLink(int trackingLinkId)
+        {
+            return _table.Where(x => x.TrackingLinkId == trackingLinkId).ToList();
+        }
     }
 }
