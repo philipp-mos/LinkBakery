@@ -10,24 +10,16 @@ namespace LinkBakery.Web.Cms.Components
         [Inject]
         private ITrackingLinkService _trackingLinkService { get; set; }
         [Inject]
-        private NavigationManager _uriHelper { get; set; }
-        [Inject]
         private IConfiguration _configuration { get; set; }
-        [Inject]
-        private IJSRuntime _jsRuntime { get; set; }
-
 
         protected IEnumerable<TrackingLinkOverviewDto> trackingLinks = new List<TrackingLinkOverviewDto>();
+        protected string redirectWebUrl = "";
 
         protected override async Task OnInitializedAsync()
         {
             trackingLinks = await _trackingLinkService.GetAllAsync();
+            redirectWebUrl = _configuration["RedirectWebUrl"];
         }
-
-
-        protected void NavigateToEdit(int id) => _uriHelper.NavigateTo($"/TrackingLinks/Edit/{ id }");
-        protected void NavigateToChart(int id) => _uriHelper.NavigateTo($"/TrackingLinks/Chart/{ id }");
-        protected void NavigateToTrackingLinkInNewTab(string key) => _jsRuntime.InvokeAsync<object>("open", $"{ _configuration["RedirectWebUrl"] }{ key }", "_blank");
 
 
         protected string GetActiveValueTitle(bool isActive)

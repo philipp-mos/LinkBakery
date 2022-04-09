@@ -20,9 +20,9 @@
                 <td>@trackingLink.TargetUrl</td>
                 <td>@GetActiveValueTitle(trackingLink.IsActive)</td>
                 <td>
-                    <span @onclick="(() => NavigateToEdit(trackingLink.Id))" class="oi oi-cog me-2"></span>
-                    <span @onclick="(() => NavigateToChart(trackingLink.Id))" class="oi oi-bar-chart me-2"></span>
-                    <span @onclick="(() => NavigateToTrackingLinkInNewTab(trackingLink.Key))" class="oi oi-external-link"></span>
+                    <NavLink href="@($"/TrackingLinks/Edit/{ trackingLink.Id }")" Match="NavLinkMatch.Prefix"><span class="oi oi-cog me-2"></span></NavLink>
+                    <NavLink href="@($"/TrackingLinks/Chart/{ trackingLink.Id }")" Match="NavLinkMatch.Prefix"><span class="oi oi-bar-chart me-2"></span></NavLink>
+                    <NavLink href="@($"{ redirectWebUrl }{ trackingLink.Key }")" Match="NavLinkMatch.Prefix" target="_blank" rel="noopener nofollow"><span class="oi oi-external-link me-2"></span></NavLink>
                 </td>
             </tr>
         }
