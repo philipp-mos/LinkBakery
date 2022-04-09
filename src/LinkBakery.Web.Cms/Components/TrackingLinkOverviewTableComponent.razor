@@ -1,11 +1,4 @@
-﻿@using LinkBakery.Web.Cms.Services.Interfaces
-@using LinkBakery.Web.Cms.Dtos
-
-@inject ITrackingLinkService trackingLinkService
-@inject NavigationManager uriHelper
-@inject IJSRuntime jsRuntime
-@inject IConfiguration configuration
-
+﻿@inherits TrackingLinkOverviewTableComponentBase
 
 
 <table class="table table-striped table-hover">
@@ -35,30 +28,3 @@
         }
     </tbody>
 </table>
-
-
-
-@code {
-    private IEnumerable<TrackingLinkOverviewDto> trackingLinks = new List<TrackingLinkOverviewDto>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        trackingLinks = await trackingLinkService.GetAllAsync();
-    }
-
-
-    void NavigateToEdit(int id) => uriHelper.NavigateTo($"/TrackingLinks/Edit/{ id }");
-    void NavigateToChart(int id) => uriHelper.NavigateTo($"/TrackingLinks/Chart/{ id }");
-    void NavigateToTrackingLinkInNewTab(string key) => jsRuntime.InvokeAsync<object>("open", $"{ configuration["RedirectWebUrl"] }{ key }", "_blank");
-
-
-    private string GetActiveValueTitle(bool isActive)
-    {
-        if (isActive)
-        {
-            return "Ja";
-        }
-
-        return "Nein";
-    }
-}

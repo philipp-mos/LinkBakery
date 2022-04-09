@@ -1,9 +1,4 @@
-﻿@using LinkBakery.Web.Cms.Dtos
-@using LinkBakery.Web.Cms.Services.Interfaces
-
-@inject ITrackingLinkService trackingLinkService
-@inject NavigationManager uriHelper
-
+﻿@inherits TrackingLinkEditComponentBase
 
 
 <div class="form-floating mb-3">
@@ -37,23 +32,3 @@
     <button type="submit" class="btn btn-primary mt-5">Speichern</button>
 
 </EditForm>
-
-
-
-@code {
-    [Parameter]
-    public int Id { get; set; }
-    
-    
-    private TrackingLinkEditDto trackingLink;
-
-    protected override async Task OnInitializedAsync()
-        => trackingLink = await trackingLinkService.FindByIdAsync(Id);
-
-
-    private void HandleValidSubmit()
-    {
-        trackingLinkService.UpdateEntry(trackingLink);
-        uriHelper.NavigateTo("/TrackingLinks/Overview", true);
-    }
-}
