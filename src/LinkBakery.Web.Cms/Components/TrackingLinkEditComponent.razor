@@ -13,18 +13,18 @@
     <ValidationSummary />
 
     <div class="form-floating mb-3">
-        <input class="form-control" @bind-value="trackingLink.TargetUrl">
-        <label for="floatingInput">Ziel Url</label>
+        <InputText id="targeturl" class="form-control col-sm-8" @bind-Value="@trackingLink.TargetUrl"></InputText>
+        <label for="targeturl">Ziel Url</label>
     </div>
     
 
     <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="isactive" @bind="trackingLink.IsActive">
+        <InputCheckbox id="isactive" class="form-check-input" @bind-Value="@trackingLink.IsActive"></InputCheckbox>
         <label class="form-check-label" for="isactive">Aktiv</label>
     </div>
 
     <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="allowqueryparameter" @bind="trackingLink.RedirectWithQueryParameter">
+        <InputCheckbox id="allowqueryparameter" class="form-check-input" @bind-Value="@trackingLink.RedirectWithQueryParameter"></InputCheckbox>
         <label class="form-check-label" for="allowqueryparameter">Queryparameter weiterleiten</label>
     </div>
 
