@@ -3,6 +3,8 @@
 
 @inject ITrackingLinkService trackingLinkService
 @inject NavigationManager uriHelper
+@inject IJSRuntime jsRuntime
+@inject IConfiguration configuration
 
 
 
@@ -13,7 +15,7 @@
             <th scope="col">Key</th>
             <th scope="col">Url Ziel</th>
             <th scope="col">Aktiv</th>
-            <th scope="col">Bearbeiten</th>
+            <th scope="col">Aktionen</th>
         </tr>
     </thead>
     <tbody>        
@@ -26,7 +28,8 @@
                 <td>@GetActiveValueTitle(trackingLink.IsActive)</td>
                 <td>
                     <span @onclick="(() => NavigateToEdit(trackingLink.Id))" class="oi oi-cog me-2"></span>
-                    <span @onclick="(() => NavigateToChart(trackingLink.Id))" class="oi oi-bar-chart"></span>
+                    <span @onclick="(() => NavigateToChart(trackingLink.Id))" class="oi oi-bar-chart me-2"></span>
+                    <span @onclick="(() => NavigateToTrackingLinkInNewTab(trackingLink.Key))" class="oi oi-external-link"></span>
                 </td>
             </tr>
         }
@@ -43,9 +46,10 @@
         trackingLinks = await trackingLinkService.GetAllAsync();
     }
 
-    
+
     void NavigateToEdit(int id) => uriHelper.NavigateTo($"/TrackingLinks/Edit/{ id }");
     void NavigateToChart(int id) => uriHelper.NavigateTo($"/TrackingLinks/Chart/{ id }");
+    void NavigateToTrackingLinkInNewTab(string key) => jsRuntime.InvokeAsync<object>("open", $"{ configuration["RedirectWebUrl"] }{ key }", "_blank");
 
 
     private string GetActiveValueTitle(bool isActive)
