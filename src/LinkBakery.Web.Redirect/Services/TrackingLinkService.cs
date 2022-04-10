@@ -1,31 +1,16 @@
-﻿using AutoMapper;
-using LinkBakery.Core.Models;
+﻿using LinkBakery.Core.Models;
 using LinkBakery.Core.Repositories.Interfaces;
-using LinkBakery.Web.Redirect.Dtos;
 using LinkBakery.Web.Redirect.Services.Interfaces;
 
 namespace LinkBakery.Web.Redirect.Services
 {
-    public class TrackingLinkService : ITrackingLinkService
+    public class TrackingLinkService : Core.Services.TrackingLinkService, ITrackingLinkService
     {
-        private readonly ITrackingLinkRepository _trackingLinkRepository;
-        private readonly ITrackingLinkCallRepository _trackingLinkCallRepository;
-        private readonly IMapper _mapper;
-
-
         public TrackingLinkService(
             ITrackingLinkRepository trackingLinkRepository,
-            ITrackingLinkCallRepository trackingLinkCallRepository,
-            IMapper mapper)
-        {
-            _trackingLinkRepository = trackingLinkRepository;
-            _trackingLinkCallRepository = trackingLinkCallRepository;
-            _mapper = mapper;
-        }
-
-
-        public IEnumerable<TrackingLinkDto> GetAll()
-            => _mapper.Map<IEnumerable<TrackingLinkDto>>(_trackingLinkRepository.GetAllAsync());
+            ITrackingLinkCallRepository trackingLinkCallRepository)
+            : base(trackingLinkRepository, trackingLinkCallRepository)
+        { }
 
 
         public string? GetLinkAndTrackCall(string key, string? queryString = null)

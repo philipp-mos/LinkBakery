@@ -1,0 +1,34 @@
+﻿@inherits TrackingLinkEditComponentBase
+
+
+<div class="form-floating mb-3">
+    <input class="form-control" value="@trackingLink.Key" disabled>
+    <label for="floatingInput">Key</label>
+</div>
+
+
+<EditForm Model="@trackingLink" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-floating mb-3">
+        <InputText id="targeturl" class="form-control col-sm-8" @bind-Value="@trackingLink.TargetUrl"></InputText>
+        <label for="targeturl">Ziel Url</label>
+    </div>
+    
+
+    <div class="form-check">
+        <InputCheckbox id="isactive" class="form-check-input" @bind-Value="@trackingLink.IsActive"></InputCheckbox>
+        <label class="form-check-label" for="isactive">Aktiv</label>
+    </div>
+
+    <div class="form-check">
+        <InputCheckbox id="allowqueryparameter" class="form-check-input" @bind-Value="@trackingLink.RedirectWithQueryParameter"></InputCheckbox>
+        <label class="form-check-label" for="allowqueryparameter">Queryparameter weiterleiten</label>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary mt-5">Speichern</button>
+
+</EditForm>

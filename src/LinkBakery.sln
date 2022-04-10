@@ -7,6 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkBakery.Web.Redirect", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkBakery.Core", "LinkBakery.Core\LinkBakery.Core.csproj", "{A7179063-1F89-4F5C-98E2-E0F37C8F1192}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A7E84CC6-1B76-4B83-BCC3-B81B52101FD5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkBakery.Web.Cms", "LinkBakery.Web.Cms\LinkBakery.Web.Cms.csproj", "{16EBFB1B-AE39-43B6-B009-AE03CB36C765}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +28,10 @@ Global
 		{A7179063-1F89-4F5C-98E2-E0F37C8F1192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7179063-1F89-4F5C-98E2-E0F37C8F1192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7179063-1F89-4F5C-98E2-E0F37C8F1192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16EBFB1B-AE39-43B6-B009-AE03CB36C765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16EBFB1B-AE39-43B6-B009-AE03CB36C765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16EBFB1B-AE39-43B6-B009-AE03CB36C765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16EBFB1B-AE39-43B6-B009-AE03CB36C765}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

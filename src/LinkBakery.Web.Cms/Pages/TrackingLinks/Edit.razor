@@ -1,0 +1,16 @@
+﻿@page "/TrackingLinks/Edit/{Id:int}"
+
+@using LinkBakery.Web.Cms.Components
+
+
+<PageTitle>Link Bearbeiten</PageTitle>
+
+<h2>Link Bearbeiten</h2>
+
+<TrackingLinkEditComponent Id="@Id" />
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}

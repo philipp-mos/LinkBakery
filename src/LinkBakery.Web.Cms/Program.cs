@@ -1,10 +1,9 @@
 using LinkBakery.Core.Data;
 using LinkBakery.Core.Repositories;
 using LinkBakery.Core.Repositories.Interfaces;
-using LinkBakery.Web.Redirect.Services;
-using LinkBakery.Web.Redirect.Services.Interfaces;
+using LinkBakery.Web.Cms.Services;
+using LinkBakery.Web.Cms.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,33 +15,34 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     );
 });
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 builder.Services.AddScoped<ITrackingLinkRepository, TrackingLinkRepository>();
 builder.Services.AddScoped<ITrackingLinkCallRepository, TrackingLinkCallRepository>();
 
 builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
 
 
-
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 
 var app = builder.Build();
 
-
-var redirectTrackingKey = (string key, ITrackingLinkService trackingLinkService, HttpContext httpContext) =>
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
 {
-    var targetUrl = trackingLinkService.GetLinkAndTrackCall(key, httpContext.Request.QueryString.Value);
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
 
-    if (string.IsNullOrEmpty(targetUrl))
-    {
-        httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
-        return;
-    }
+app.UseHttpsRedirection();
 
-    httpContext.Response.StatusCode = (int)HttpStatusCode.Redirect;
-    httpContext.Response.Redirect(targetUrl);
-};
+app.UseStaticFiles();
 
+app.UseRouting();
 
-app.MapGet("/{key}", redirectTrackingKey);
-
+app.MapBlazorHub();
+app.MapFallbackToPage("/_Host");
 
 app.Run();
