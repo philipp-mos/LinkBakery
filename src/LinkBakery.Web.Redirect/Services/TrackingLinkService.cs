@@ -1,18 +1,18 @@
-﻿using LinkBakery.Core.Models;
-using LinkBakery.Core.Repositories.Interfaces;
+﻿// using LinkBakery.Core.Models;
+// using LinkBakery.Core.Repositories.Interfaces;
 using LinkBakery.Web.Redirect.Services.Interfaces;
 
 namespace LinkBakery.Web.Redirect.Services
 {
-    public class TrackingLinkService : Core.Services.TrackingLinkService, ITrackingLinkService
-    {
+    public class TrackingLinkService // : Core.Services.TrackingLinkService, ITrackingLinkService
+    {/*
         public TrackingLinkService(
             ITrackingLinkRepository trackingLinkRepository,
             ITrackingLinkCallRepository trackingLinkCallRepository)
             : base(trackingLinkRepository, trackingLinkCallRepository)
         { }
 
-
+        
         public string? GetLinkAndTrackCall(string key, string? queryString = null)
         {
             var trackingLink = _trackingLinkRepository.FindActiveByKey(key);
@@ -50,5 +50,6 @@ namespace LinkBakery.Web.Redirect.Services
 
             _trackingLinkCallRepository.InsertAndSafeAsync(trackingLinkCall);
         }
+        */
     }
 }

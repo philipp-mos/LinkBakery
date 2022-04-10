@@ -1,31 +1,24 @@
-using LinkBakery.Core.Data;
-using LinkBakery.Core.Repositories;
-using LinkBakery.Core.Repositories.Interfaces;
+using LinkBakery.Application;
+using LinkBakery.Persistence;
 using LinkBakery.Web.Redirect.Services;
 using LinkBakery.Web.Redirect.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        assembly => assembly.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
-    );
-});
-
-builder.Services.AddScoped<ITrackingLinkRepository, TrackingLinkRepository>();
-builder.Services.AddScoped<ITrackingLinkCallRepository, TrackingLinkCallRepository>();
-
-builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
+var services = builder.Services;
 
 
+services.AddApplicationServices();
+services.AddPersistenceServices(builder.Configuration);
+
+
+// builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
 
 
 var app = builder.Build();
 
+
+/*
 
 var redirectTrackingKey = (string key, ITrackingLinkService trackingLinkService, HttpContext httpContext) =>
 {
@@ -41,6 +34,12 @@ var redirectTrackingKey = (string key, ITrackingLinkService trackingLinkService,
     httpContext.Response.Redirect(targetUrl);
 };
 
+*/
+
+var redirectTrackingKey = (string key) =>
+{
+    return $"Hallo { key }";
+};
 
 app.MapGet("/{key}", redirectTrackingKey);
 

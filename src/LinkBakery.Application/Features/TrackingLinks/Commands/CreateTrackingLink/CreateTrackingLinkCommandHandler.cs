@@ -22,7 +22,7 @@ namespace LinkBakery.Application.Features.TrackingLinks.Commands.CreateTrackingL
 
         public async Task<int> Handle(CreateTrackingLinkCommand request, CancellationToken cancellationToken)
         {
-            var trackingLink = await _trackingLinkRepository.InsertAndSafeAsync(_mapper.Map<TrackingLink>(request));
+            var trackingLink = await _trackingLinkRepository.AddAsync(_mapper.Map<TrackingLink>(request));
 
             if (trackingLink == null)
             {
