@@ -1,7 +1,6 @@
 ﻿using LinkBakery.Web.Cms.Services.Interfaces;
 using LinkBakery.Web.Cms.Dtos;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 
 namespace LinkBakery.Web.Cms.Components
 {
