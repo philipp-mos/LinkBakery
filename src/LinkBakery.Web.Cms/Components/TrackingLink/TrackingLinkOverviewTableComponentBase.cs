@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkList;
 
-namespace LinkBakery.Web.Cms.Components
+namespace LinkBakery.Web.Cms.Components.TrackingLink
 {
     public class TrackingLinkOverviewTableComponentBase : ComponentBase
     {
