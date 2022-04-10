@@ -1,54 +1,33 @@
 ﻿using AutoMapper;
-using LinkBakery.Core.Repositories.Interfaces;
-using LinkBakery.Web.Cms.Dtos;
+using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkDetail;
+using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkList;
 using LinkBakery.Web.Cms.Services.Interfaces;
+using MediatR;
 
 namespace LinkBakery.Web.Cms.Services
 {
-    public class TrackingLinkService : Core.Services.TrackingLinkService, ITrackingLinkService
+    public class TrackingLinkService : ITrackingLinkService
     {
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
 
-        public TrackingLinkService(
-            ITrackingLinkRepository trackingLinkRepository,
-            ITrackingLinkCallRepository trackingLinkCallRepository,
-            IMapper mapper)
-            : base(trackingLinkRepository, trackingLinkCallRepository)
+        public TrackingLinkService(IMapper mapper, IMediator mediator)
         {
             _mapper = mapper;
+            _mediator = mediator;
         }
 
 
-        public async Task<IEnumerable<TrackingLinkOverviewDto>> GetAllAsync()
-            => _mapper.Map<IEnumerable<TrackingLinkOverviewDto>>(await _trackingLinkRepository.GetAllAsync());
-
-
-        public async Task<TrackingLinkEditDto> FindByIdAsync(int id)
-            => _mapper.Map<TrackingLinkEditDto>(await _trackingLinkRepository.GetByIdAsync(id));
-
-        public IEnumerable<TrackingLinkCallChartDto> GetCallChartData(int trackingLinkId)
+        public async Task<List<TrackingLinkListVm>> GetAllAsync()
         {
-            return _mapper.Map<IEnumerable<TrackingLinkCallChartDto>>(_trackingLinkCallRepository.GetAllForTrackingLink(trackingLinkId));
+            return await _mediator.Send(new GetTrackingLinkListQuery());
         }
 
 
-        public async void UpdateEntry(TrackingLinkEditDto trackingLinkDto)
+        public async Task<TrackingLinkDetailVm> FindByIdAsync(int id)
         {
-            var trackingLink = await _trackingLinkRepository.GetByIdAsync(trackingLinkDto.Id);
-
-            if (trackingLink == null)
-            {
-                return;
-            }
-
-            trackingLink.TargetUrl = trackingLinkDto.TargetUrl;
-            trackingLink.IsActive = trackingLinkDto.IsActive;
-            trackingLink.RedirectWithQueryParameter = trackingLinkDto.RedirectWithQueryParameter;
-
-            _trackingLinkRepository.Update(trackingLink);
-            _trackingLinkRepository.SaveAsync();
+            return await _mediator.Send(new GetTrackingLinkDetailQuery() { Id = id });
         }
-
     }
 }

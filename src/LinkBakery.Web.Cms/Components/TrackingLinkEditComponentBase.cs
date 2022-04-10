@@ -1,6 +1,6 @@
 ﻿using LinkBakery.Web.Cms.Services.Interfaces;
-using LinkBakery.Web.Cms.Dtos;
 using Microsoft.AspNetCore.Components;
+using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkDetail;
 
 namespace LinkBakery.Web.Cms.Components
 {
@@ -17,7 +17,7 @@ namespace LinkBakery.Web.Cms.Components
         public int Id { get; set; }
 
 
-        protected TrackingLinkEditDto trackingLink;
+        protected TrackingLinkDetailVm trackingLink;
 
         protected override async Task OnInitializedAsync()
             => trackingLink = await _trackingLinkService.FindByIdAsync(Id);
@@ -25,7 +25,7 @@ namespace LinkBakery.Web.Cms.Components
 
         protected void HandleValidSubmit()
         {
-            _trackingLinkService.UpdateEntry(trackingLink);
+            // _trackingLinkService.UpdateEntry(trackingLink);
             _uriHelper.NavigateTo("/TrackingLinks/Overview", true);
         }
     }

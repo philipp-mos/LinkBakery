@@ -1,31 +1,23 @@
-using LinkBakery.Core.Data;
-using LinkBakery.Core.Repositories;
-using LinkBakery.Core.Repositories.Interfaces;
+using LinkBakery.Application;
+using LinkBakery.Persistence;
 using LinkBakery.Web.Cms.Services;
 using LinkBakery.Web.Cms.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        assembly => assembly.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
-    );
-});
-
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+var services = builder.Services;
 
 
-builder.Services.AddScoped<ITrackingLinkRepository, TrackingLinkRepository>();
-builder.Services.AddScoped<ITrackingLinkCallRepository, TrackingLinkCallRepository>();
-
-builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
+services.AddApplicationServices();
+services.AddPersistenceServices(builder.Configuration);
 
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+
+builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
+
 
 var app = builder.Build();
 

@@ -6,8 +6,6 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Key</th>
-            <th scope="col">Url Ziel</th>
-            <th scope="col">Aktiv</th>
             <th scope="col">Aktionen</th>
         </tr>
     </thead>
@@ -17,11 +15,9 @@
             <tr>
                 <td>@trackingLink.Id</td>
                 <td>@trackingLink.Key</td>
-                <td>@trackingLink.TargetUrl</td>
-                <td>@GetActiveValueTitle(trackingLink.IsActive)</td>
+                
                 <td>
                     <NavLink href="@($"/TrackingLinks/Edit/{ trackingLink.Id }")" Match="NavLinkMatch.Prefix"><span class="oi oi-cog me-2"></span></NavLink>
-                    <NavLink href="@($"/TrackingLinks/Chart/{ trackingLink.Id }")" Match="NavLinkMatch.Prefix"><span class="oi oi-bar-chart me-2"></span></NavLink>
                     <NavLink href="@($"{ redirectWebUrl }{ trackingLink.Key }")" Match="NavLinkMatch.Prefix" target="_blank" rel="noopener nofollow"><span class="oi oi-external-link me-2"></span></NavLink>
                 </td>
             </tr>
