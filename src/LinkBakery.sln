@@ -5,14 +5,22 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkBakery.Web.Redirect", "LinkBakery.Web.Redirect\LinkBakery.Web.Redirect.csproj", "{FE078DCB-8FA2-4D6D-8A0E-7809A5B2D585}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkBakery.Core", "LinkBakery.Core\LinkBakery.Core.csproj", "{A7179063-1F89-4F5C-98E2-E0F37C8F1192}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkBakery.Core", "LinkBakery.Core\LinkBakery.Core.csproj", "{A7179063-1F89-4F5C-98E2-E0F37C8F1192}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A7E84CC6-1B76-4B83-BCC3-B81B52101FD5}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkBakery.Web.Cms", "LinkBakery.Web.Cms\LinkBakery.Web.Cms.csproj", "{16EBFB1B-AE39-43B6-B009-AE03CB36C765}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkBakery.Web.Cms", "LinkBakery.Web.Cms\LinkBakery.Web.Cms.csproj", "{16EBFB1B-AE39-43B6-B009-AE03CB36C765}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F4D1D8BA-B836-4C7F-B199-BD17BBCE59EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D295E083-8EBE-4A55-995E-790B5885B87A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{E8D60DEA-DC91-48EB-9BE4-5EDECE3296FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{01D3A78F-3CAF-4D6F-9DE4-D9FAA34383AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +43,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE078DCB-8FA2-4D6D-8A0E-7809A5B2D585} = {01D3A78F-3CAF-4D6F-9DE4-D9FAA34383AF}
+		{A7179063-1F89-4F5C-98E2-E0F37C8F1192} = {F4D1D8BA-B836-4C7F-B199-BD17BBCE59EA}
+		{16EBFB1B-AE39-43B6-B009-AE03CB36C765} = {E8D60DEA-DC91-48EB-9BE4-5EDECE3296FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E189859-EA7A-449C-B5FD-E20E4EB02FEC}
