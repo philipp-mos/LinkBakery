@@ -4,7 +4,7 @@ using MediatR;
 
 namespace LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkDetail
 {
-    public class GetTrackingLinkDetailQueryHandler : IRequestHandler<GetTrackingLinkDetailQuery, List<TrackingLinkDetailVm>>
+    public class GetTrackingLinkDetailQueryHandler : IRequestHandler<GetTrackingLinkDetailQuery, TrackingLinkDetailVm>
     {
         private readonly ITrackingLinkRepository _trackingLinkRepository;
         private readonly IMapper _mapper;
@@ -21,9 +21,9 @@ namespace LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkD
 
 
 
-        public async Task<List<TrackingLinkDetailVm>> Handle(GetTrackingLinkDetailQuery request, CancellationToken cancellationToken)
+        public async Task<TrackingLinkDetailVm> Handle(GetTrackingLinkDetailQuery request, CancellationToken cancellationToken)
         {
-            return _mapper.Map<List<TrackingLinkDetailVm>>(await _trackingLinkRepository.GetByIdAsync(request.Id));
+            return _mapper.Map<TrackingLinkDetailVm>(await _trackingLinkRepository.GetByIdAsync(request.Id));
         }
     }
 }

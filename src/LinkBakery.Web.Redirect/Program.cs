@@ -1,8 +1,8 @@
-using LinkBakery.Application;
-using LinkBakery.Persistence;
-using LinkBakery.Web.Redirect.Services;
-using LinkBakery.Web.Redirect.Services.Interfaces;
 using System.Net;
+using LinkBakery.Application;
+using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkRedirectUrl;
+using LinkBakery.Persistence;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -12,33 +12,21 @@ services.AddApplicationServices();
 services.AddPersistenceServices(builder.Configuration);
 
 
-// builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
-
-
 var app = builder.Build();
 
-
-/*
-
-var redirectTrackingKey = (string key, ITrackingLinkService trackingLinkService, HttpContext httpContext) =>
+var redirectTrackingKey = async (string key, IMediator mediator, HttpContext  httpContext) =>
 {
-    var targetUrl = trackingLinkService.GetLinkAndTrackCall(key, httpContext.Request.QueryString.Value);
+    var trackingLinkRedirectUrlVm = await mediator.Send(new GetTrackingLinkRedirectUrlQuery() { Key = key });
 
-    if (string.IsNullOrEmpty(targetUrl))
+
+    if (trackingLinkRedirectUrlVm == null || string.IsNullOrEmpty(trackingLinkRedirectUrlVm.TargetUrl))
     {
-        httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+        httpContext.Response.StatusCode = (int) HttpStatusCode.NotFound;
         return;
     }
 
-    httpContext.Response.StatusCode = (int)HttpStatusCode.Redirect;
-    httpContext.Response.Redirect(targetUrl);
-};
-
-*/
-
-var redirectTrackingKey = (string key) =>
-{
-    return $"Hallo { key }";
+    httpContext.Response.StatusCode = (int) HttpStatusCode.Redirect;
+    httpContext.Response.Redirect(trackingLinkRedirectUrlVm.TargetUrl);
 };
 
 app.MapGet("/{key}", redirectTrackingKey);
