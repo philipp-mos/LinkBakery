@@ -1,13 +1,13 @@
-﻿using LinkBakery.Web.Cms.Services.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkList;
+using MediatR;
 
 namespace LinkBakery.Web.Cms.Components.TrackingLink
 {
     public class TrackingLinkOverviewTableComponentBase : ComponentBase
     {
         [Inject]
-        private ITrackingLinkService _trackingLinkService { get; set; }
+        private IMediator _mediator { get; set; }
         [Inject]
         private IConfiguration _configuration { get; set; }
 
@@ -16,19 +16,14 @@ namespace LinkBakery.Web.Cms.Components.TrackingLink
 
         protected override async Task OnInitializedAsync()
         {
-            trackingLinks = await _trackingLinkService.GetAllAsync();
+            trackingLinks = await _mediator.Send(new GetTrackingLinkListQuery());
             redirectWebUrl = _configuration["RedirectWebUrl"];
         }
 
 
         protected string GetActiveValueTitle(bool isActive)
         {
-            if (isActive)
-            {
-                return "Ja";
-            }
-
-            return "Nein";
+            return isActive ? "Ja" : "Nein";
         }
     }
 }

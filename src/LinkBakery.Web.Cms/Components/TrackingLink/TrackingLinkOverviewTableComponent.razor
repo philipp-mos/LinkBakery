@@ -6,6 +6,8 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Key</th>
+            <th scope="col">Aktiv</th>
+            <th scope="col">Zuletzt bearbeitet</th>
             <th scope="col">Aktionen</th>
         </tr>
     </thead>
@@ -15,6 +17,8 @@
             <tr>
                 <td>@trackingLink.Id</td>
                 <td>@trackingLink.Key</td>
+                <td>@GetActiveValueTitle(trackingLink.IsActive)</td>
+                <td>@trackingLink.LastModifiedDate.ToString("dd.MM.yyyy HH:mm")</td>
                 
                 <td>
                     <NavLink href="@($"/TrackingLinks/Edit/{ trackingLink.Id }")" Match="NavLinkMatch.Prefix"><span class="oi oi-cog me-2"></span></NavLink>

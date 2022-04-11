@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LinkBakery.Application.Features.TrackingLinks.Commands.CreateTrackingLink;
+using LinkBakery.Application.Features.TrackingLinks.Commands.UpdateTrackingLink;
 using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkDetail;
 using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkList;
 using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkRedirectUrl;
@@ -16,6 +17,7 @@ namespace LinkBakery.Application.Profiles
             CreateMap<TrackingLink, TrackingLinkRedirectUrlVm>().ReverseMap();
 
             CreateMap<TrackingLink, CreateTrackingLinkCommand>().ReverseMap();
+            CreateMap<TrackingLink, UpdateTrackingLinkCommand>().ReverseMap();
         }
     }
 }

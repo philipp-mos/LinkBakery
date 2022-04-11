@@ -1,7 +1,5 @@
 using LinkBakery.Application;
 using LinkBakery.Persistence;
-using LinkBakery.Web.Cms.Services;
-using LinkBakery.Web.Cms.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +12,6 @@ services.AddPersistenceServices(builder.Configuration);
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-
-
-builder.Services.AddScoped<ITrackingLinkService, TrackingLinkService>();
 
 
 var app = builder.Build();
