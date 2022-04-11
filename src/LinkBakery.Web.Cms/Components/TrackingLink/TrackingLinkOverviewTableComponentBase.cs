@@ -1,9 +1,8 @@
 ﻿using LinkBakery.Web.Cms.Services.Interfaces;
-using LinkBakery.Web.Cms.Dtos;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkList;
 
-namespace LinkBakery.Web.Cms.Components
+namespace LinkBakery.Web.Cms.Components.TrackingLink
 {
     public class TrackingLinkOverviewTableComponentBase : ComponentBase
     {
@@ -12,7 +11,7 @@ namespace LinkBakery.Web.Cms.Components
         [Inject]
         private IConfiguration _configuration { get; set; }
 
-        protected IEnumerable<TrackingLinkOverviewDto> trackingLinks = new List<TrackingLinkOverviewDto>();
+        protected List<TrackingLinkListVm> trackingLinks = new List<TrackingLinkListVm>();
         protected string redirectWebUrl = "";
 
         protected override async Task OnInitializedAsync()

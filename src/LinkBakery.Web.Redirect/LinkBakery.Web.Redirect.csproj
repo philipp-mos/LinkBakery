@@ -9,16 +9,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
+        <PackageReference Include="MediatR" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0-preview.2.22153.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
         <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\LinkBakery.Core\LinkBakery.Core.csproj" />
+      <ProjectReference Include="..\LinkBakery.Application\LinkBakery.Application.csproj" />
+      <ProjectReference Include="..\LinkBakery.Domain\LinkBakery.Domain.csproj" />
+      <ProjectReference Include="..\LinkBakery.Persistence\LinkBakery.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

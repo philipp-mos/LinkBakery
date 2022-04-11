@@ -1,12 +1,12 @@
-﻿using LinkBakery.Web.Cms.Dtos;
+﻿using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkDetail;
+using LinkBakery.Application.Features.TrackingLinks.Queries.GetTrackingLinkList;
 
 namespace LinkBakery.Web.Cms.Services.Interfaces
 {
-    public interface ITrackingLinkService : Core.Services.Interfaces.ITrackingLinkService
+    public interface ITrackingLinkService
     {
-        Task<IEnumerable<TrackingLinkOverviewDto>> GetAllAsync();
-        Task<TrackingLinkEditDto> FindByIdAsync(int id);
-        IEnumerable<TrackingLinkCallChartDto> GetCallChartData(int trackingLinkId);
-        void UpdateEntry(TrackingLinkEditDto trackingLinkDto);
+        Task<List<TrackingLinkListVm>> GetAllAsync();
+        Task<TrackingLinkDetailVm> FindByIdAsync(int id);
+        // void UpdateEntry(TrackingLinkEditDto trackingLinkDto);
     }
 }
