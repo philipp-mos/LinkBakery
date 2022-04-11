@@ -16,6 +16,7 @@ namespace LinkBakery.Application.Profiles
             CreateMap<TrackingLink, TrackingLinkRedirectUrlVm>().ReverseMap();
 
             CreateMap<TrackingLink, CreateTrackingLinkCommand>().ReverseMap();
+            CreateMap<TrackingLink, UpdateTrackingLinkCommand>().ReverseMap();
         }
     }
 }

@@ -5,8 +5,8 @@ using LinkBakery.Persistence;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
-var services = builder.Services;
 
+var services = builder.Services;
 
 services.AddApplicationServices();
 services.AddPersistenceServices(builder.Configuration);
@@ -14,10 +14,10 @@ services.AddPersistenceServices(builder.Configuration);
 
 var app = builder.Build();
 
+
 var redirectTrackingKey = async (string key, IMediator mediator, HttpContext  httpContext) =>
 {
     var trackingLinkRedirectUrlVm = await mediator.Send(new GetTrackingLinkRedirectUrlQuery() { Key = key });
-
 
     if (trackingLinkRedirectUrlVm == null || string.IsNullOrEmpty(trackingLinkRedirectUrlVm.TargetUrl))
     {
@@ -29,7 +29,10 @@ var redirectTrackingKey = async (string key, IMediator mediator, HttpContext  ht
     httpContext.Response.Redirect(trackingLinkRedirectUrlVm.TargetUrl);
 };
 
+
 app.MapGet("/{key}", redirectTrackingKey);
+
+app.MapGet("/", () => "Please pass a valid Key to proceed");
 
 
 app.Run();
